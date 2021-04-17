@@ -7,34 +7,22 @@ export default class App extends Component {
     super(props)
   
     this.state = {
-      monsters : [
-        {
-          id : "1",
-          name : "ghost"
-        },
-        {
-          id : "2",
-          name : "vampire"
-        },
-        {
-          id : "3",
-          name : "zombie"
-        },
-        {
-          id : "4",
-          name : "dracula"
-        }
-
-      ]
+      monsters : []
     }
   }
   
+  componentDidMount(){
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(response => response.json())
+    .then(users => this.setState({monsters:users}));
+  }
  
   render() {
     return (
       <div className = 'App'>
         {this.state.monsters.map(monster => <h1 key = {monster.id}>{monster.name}</h1>)}
       </div>
+      
     )
   }
-}
+} 
